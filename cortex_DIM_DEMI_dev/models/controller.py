@@ -338,7 +338,6 @@ class ControllerLocalDEMI(ModelPlugin):
             print('Built LocalDEMI')
         if 'local' in self.model_names:
             model = getattr(self, 'local')
-            print('DEMI Discriminator:{}'.format(demi_discriminator))
             model.build(self.nets.encoder, copy.deepcopy(config), demi_discriminator=demi_discriminator)
             print('Built LocalDIM')
 
@@ -395,7 +394,7 @@ class ControllerLocalDEMI(ModelPlugin):
         for name in self.model_names:
             model = getattr(self, name)
             # Some models have their forward passes embedded into the encoder for speed.
-            if isinstance(model, (LocalDIM, GlobalDIM, CoordinatePredictor)):
+            if isinstance(model, (LocalDIM, GlobalDIM, CoordinatePredictor, LocalDEMI)):
                 model.routine(outs=layer_outs)
             else:
                 model.routine(outs=outs)
