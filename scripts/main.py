@@ -12,9 +12,9 @@ from cortex.main import run
 from cortex_DIM_DEMI_dev.evaluation_models.classification_eval import ClassificationEval
 from cortex_DIM_DEMI_dev.evaluation_models.ndm_eval import NDMEval
 from cortex_DIM_DEMI_dev.evaluation_models.msssim_eval import MSSSIMEval
-from cortex_DIM_DEMI_dev.models.controller import Controller
+from cortex_DIM_DEMI_dev.models.controller import Controller, ControllerLocalDEMI
 from cortex_DIM_DEMI_dev.models.coordinates import CoordinatePredictor
-from cortex_DIM_DEMI_dev.models.dim import GlobalDIM, LocalDIM
+from cortex_DIM_DEMI_dev.models.dim import GlobalDIM, LocalDIM, LocalDEMI
 from cortex_DIM_DEMI_dev.models.prior_matching import PriorMatching
 
 
@@ -25,6 +25,7 @@ if __name__ == '__main__':
 
     mode_dict = dict(
         local=LocalDIM,
+        demi=LocalDEMI,
         glob=GlobalDIM,
         prior=PriorMatching,
         coordinates=CoordinatePredictor,
@@ -62,5 +63,5 @@ if __name__ == '__main__':
     models = dict((k, mode_dict[k]) for k in models)
 
     sys.argv = [sys.argv[0]] + sys.argv[i:]
-    controller = Controller(inputs=dict(inputs='data.images'), **models)
+    controller = ControllerLocalDEMI(inputs=dict(inputs='data.images'), **models)
     run(controller)
