@@ -1,11 +1,11 @@
 from setuptools import setup
 
-setup(name='cortex_DIM_DEMI',
-      version='0.14',
-      description='The Deep InfoMax package',
-      author='R Devon Hjelm',
-      author_email='erroneus@gmail.com',
-      packages=['cortex_DIM_DEMI', 'cortex_DIM_DEMI.configs', 'cortex_DIM_DEMI.functions', 'cortex_DIM_DEMI.nn_modules',
-                'cortex_DIM_DEMI.models', 'cortex_DIM_DEMI.evaluation_models'],
+setup(name='cortex_DIM_DEMI_demi',
+      version='0.15',
+      description='The Deep InfoMax package (with DEMI)',
+      author='Ruizhi Ray Liao; R Devon Hjelm',
+      author_email='ruizhi@mit.edu; erroneus@gmail.com',
+      packages=['cortex_DIM_DEMI_demi', 'cortex_DIM_DEMI_demi.configs', 'cortex_DIM_DEMI_demi.functions', 'cortex_DIM_DEMI_demi.nn_modules',
+                'cortex_DIM_DEMI_demi.models', 'cortex_DIM_DEMI_demi.evaluation_models'],
       install_requires=['cortex==0.13a0'],
       zip_safe=False)

@@ -9,13 +9,13 @@ import sys
 
 from cortex.main import run
 
-from cortex_DIM_DEMI.evaluation_models.classification_eval import ClassificationEval
-from cortex_DIM_DEMI.evaluation_models.ndm_eval import NDMEval
-from cortex_DIM_DEMI.evaluation_models.msssim_eval import MSSSIMEval
-from cortex_DIM_DEMI.models.controller import Controller
-from cortex_DIM_DEMI.models.coordinates import CoordinatePredictor
-from cortex_DIM_DEMI.models.dim import GlobalDIM, LocalDIM
-from cortex_DIM_DEMI.models.prior_matching import PriorMatching
+from cortex_DIM_DEMI_demi.evaluation_models.classification_eval import ClassificationEval
+from cortex_DIM_DEMI_demi.evaluation_models.ndm_eval import NDMEval
+from cortex_DIM_DEMI_demi.evaluation_models.msssim_eval import MSSSIMEval
+from cortex_DIM_DEMI_demi.models.controller import Controller
+from cortex_DIM_DEMI_demi.models.coordinates import CoordinatePredictor
+from cortex_DIM_DEMI_demi.models.dim import GlobalDIM, LocalDIM, LocalDEMI
+from cortex_DIM_DEMI_demi.models.prior_matching import PriorMatching
 
 
 logger = logging.getLogger('DIM')
@@ -25,6 +25,7 @@ if __name__ == '__main__':
 
     mode_dict = dict(
         local=LocalDIM,
+        demi=LocalDEMI,
         glob=GlobalDIM,
         prior=PriorMatching,
         coordinates=CoordinatePredictor,
