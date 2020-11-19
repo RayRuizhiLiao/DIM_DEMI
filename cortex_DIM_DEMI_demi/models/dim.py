@@ -286,6 +286,9 @@ class LocalDIM(ModelPlugin):
         self.nets.encoder.module.add_network(self.name, extract,
                                              networks=dict(local_net=local_MINet, global_net=global_MINet))
 
+        # self.nets.local_MINet = local_MINet
+        # self.nets.global_MINet = global_MINet
+
         return local_MINet, global_MINet
 
     def routine(self, outs=None, measure='JSD', mode='fd', scale=1.0, act_penalty=0.):
@@ -311,6 +314,11 @@ class LocalDIM(ModelPlugin):
 
         if scale > 0:
             self.add_losses(encoder=scale * loss + act_loss)
+
+        # if mode == 'demi':
+        #     demi_ce_loss = compute_dim_loss(L, G, measure='ce', mode='demi')
+        #     self.add_losses(local_MINet=demi_ce_loss)
+        #     self.add_losses(global_MINet=demi_ce_loss)
 
 class LocalDEMI(ModelPlugin):
     '''DEMI Discriminator for LocalDIM

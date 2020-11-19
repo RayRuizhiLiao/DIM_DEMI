@@ -198,21 +198,14 @@ def demi_ce_loss(l, m):
     pred_lgt = torch.cat([u_p, u_n], dim=2)
     pred_log = F.log_softmax(pred_lgt, dim=2)
 
-    positive_pred_log = pred_log[:, :, 0]
-    positive_size = positive_pred_log.size(2)
-    negative_size = pred_log[:, :, 1:].size(2)
-
-    loss = -positive_size*positive_pred_log-negative_size*(1-positive_pred_log)
-    loss = loss.mean()
-
     # The positive score is the first element of the log softmax.
-    # loss = -pred_log[:, :, 0].mean()
+    loss = -pred_log[:, :, 0].mean()
 
     return loss
 
 
 def demi_mi_loss(l, m):
-    '''Computes cross entropy loss for DEMI
+    '''Computes mutual information using the DEMI estimator
 
     Note that vectors should be sent as 1x1.
 
@@ -250,13 +243,13 @@ def demi_mi_loss(l, m):
 
     # Since this is multiclass, we concat the positive along the class dimension before performing log softmax.
     pred_lgt = torch.cat([u_p, u_n], dim=2)
-    pred_logit = F.softmax(pred_lgt, dim=2)
+    pred_prob = F.softmax(pred_lgt, dim=2)
 
-    positive_pred_logit = pred_logit[:, :, 0]
+    positive_pred_prob = pred_prob[:, :, 0]
 
     epsilon = 1e-10
 
-    loss = -torch.log((positive_pred_logit+epsilon)/(1-positive_pred_logit+epsilon))
+    loss = -torch.log((positive_pred_prob+epsilon)/(1-positive_pred_prob+epsilon))
     loss = loss.mean()
 
     # The positive score is the first element of the log softmax.
