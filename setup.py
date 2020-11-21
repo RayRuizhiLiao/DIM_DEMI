@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='cortex_DIM_DEMI',
-      version='0.14',
+      version='0.14.17',
       description='The Deep InfoMax package',
       author='R Devon Hjelm',
       author_email='erroneus@gmail.com',
